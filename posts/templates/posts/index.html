@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heestagram</title> -->
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'posts/style.css' %}">
+    {% endblock %}
+<!-- </head>
+<body> -->
+    <!-- 제목 -->
+    <!-- <h1>모든 게시물</h1>
+    <ul>
+        <li>나의 첫 #Django Project!</li>
+        <li>작성자: {{ post.author }} 본문: {{ post.body }}</li>
+    </ul>
+
+    <h1>숫자 목록</h1>
+    <ul>
+        <li>{{ numbers }}</li>
+        <li>3번째 숫자: {{ numbers.2 }}</li>
+        {% for number in numbers %}
+            <li>{{ number }}</li>
+        {% endfor %}
+    </ul> -->
+    {% block content %}
+    <div class="">
+        <h1>Posts</h1>
+        {% if posts %}
+            <!-- <ul>
+                {% for post in posts %}
+                    <li>Author: {{ post.author }} | Body: {{ post.body }}</li>
+                {% endfor %}
+            </ul> -->
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>작성자</th>
+                        <th>본문</th>
+                        <th>게시일</th>
+                        <th>상세</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <th>{{ post.id }}</th>
+                            <!-- <td>{{ post.author }}</td> -->
+                            <td>{{ post.user.get_username }}</td>
+                            <td>{{ post.body }}</td>
+                            <td>{{ post.created_at }}</td>
+                            <!-- <td><a href="/posts/{{ post.id }}">보기</a></td> -->
+                            <td><a href="{% url 'posts:detail' post.id %}">보기</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No Posts.</p>
+        {% endif %}
+
+        <a href="{% url 'posts:new' %}">글쓰기</a>
+    </div>
+    {% endblock %}
+<!-- </body>
+</html> -->
